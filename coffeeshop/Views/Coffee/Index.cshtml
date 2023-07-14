@@ -1,0 +1,40 @@
+﻿<!-- TO Get data from see_accountController.cs -->
+@model IEnumerable<coffeeList>;
+
+    <br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col-6"><h1>Coffee</h1></div>
+        <div class="col-6 text-end"><a class="btn btn-info" asp-controller="Coffee" asp-action="Create">Add</a>  </div>
+    </div>
+</div>
+<br />
+
+<!-- SETUP THE TABLE FOR THE DATA-->
+<table class="table table-bordered table-striped" style="width:100%;">
+    <thead>
+        <tr>
+        <th> ID </th>
+        <th> Name </th>
+        <th> Quantity </th>
+        <th> Action </th>
+        </tr>
+    </thead>
+    <tbody>
+         
+        @foreach(var obj in Model)
+        {
+            <tr>
+            <td width="20%">@obj.coffeeId</td>
+            <td width="20%">@obj.coffeeName</td>
+            <td width="20%">@obj.quantity</td>
+                <td width="20%">
+                    <a asp-controller="Coffee" asp-action="Edit" asp-route-Cid="@obj.coffeeId" class="btn btn-info">Edit</a>
+                    <a asp-controller="Coffee" asp-action="Delete" asp-route-Cid="@obj.coffeeId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
