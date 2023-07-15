@@ -7,7 +7,7 @@ namespace coffeeshop.Models
     public class coffeeList
     {
         [Key]
-        public int coffeeId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DisplayName("Name")]

@@ -21,15 +21,44 @@ namespace coffeeshop.Controllers
             return View(getcoffeelist);
         }
 
+        //------------------ Create -----------------------------
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        //POST
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(coffeeList obj)
+        {
+            /*
+            if (obj.account_name == obj.password.ToString())
+            {
+                //show in summary
+                ModelState.AddModelError("acc_error", "Name And Password is Same!!");
+            }*/
+            if (ModelState.IsValid) //validation
+            {
+                _db.coffeetbl.Add(obj); //like Update query
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+
 
         //------------------ Edit -----------------------------
-        public IActionResult Edit(int? Cid)
+        public IActionResult Edit(int? id)
         {
-            if (Cid == null || Cid == 0)
+            if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var coffeeFromDb = _db.coffeetbl.Find(Cid); 
+
+            coffeeList? coffeeFromDb = _db.coffeetbl.Find(id); 
 
             //if id not found
             if (coffeeFromDb == null)
